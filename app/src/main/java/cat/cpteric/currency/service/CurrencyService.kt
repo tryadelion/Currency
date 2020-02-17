@@ -2,7 +2,6 @@ package cat.cpteric.currency.service
 
 import android.content.Context
 import cat.cpteric.currency.model.CurrencyResponse
-import cat.cpteric.currency.util.HttpLoggingInterceptor
 import io.reactivex.Flowable
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -24,14 +23,8 @@ object CurrencyService {
 
     fun getCurrencies(): Flowable<CurrencyResponse> = service.fetchCurrencies("latest", "EUR")
 
-    fun configure(context: Context) {
+    fun configure() {
         okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(
-                HttpLoggingInterceptor(
-                    "CurrencyService",
-                    HttpLoggingInterceptor.Level.BODY
-                )
-            )
             .build()
         retrofit = Retrofit.Builder()
             .baseUrl(baseURL)

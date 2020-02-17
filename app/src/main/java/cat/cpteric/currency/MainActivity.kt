@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        CurrencyService.configure(this)
+        CurrencyService.configure()
         CurrencyService.getCurrencies()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d("RESULT", it.currency().toString())
                 Log.d("RESULT", it.rates().toString())
             }, {
-                Log.e("ERROR", it.message+"")
+                Log.e("ERROR", it.message + "")
             })
     }
 }
