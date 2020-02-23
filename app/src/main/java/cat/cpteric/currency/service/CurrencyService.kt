@@ -1,7 +1,7 @@
 package cat.cpteric.currency.service
 
-import android.content.Context
 import cat.cpteric.currency.model.CurrencyResponse
+import cat.cpteric.currency.model.Rate
 import io.reactivex.Flowable
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -21,7 +21,8 @@ object CurrencyService {
 
     private lateinit var service: CurrencyApi
 
-    fun getCurrencies(): Flowable<CurrencyResponse> = service.fetchCurrencies("latest", "EUR")
+    fun getCurrencies(rate: Rate): Flowable<CurrencyResponse> =
+        service.fetchCurrencies("latest", rate.code)
 
     fun configure() {
         okHttpClient = OkHttpClient.Builder()
